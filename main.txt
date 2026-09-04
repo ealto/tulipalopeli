@@ -1,4 +1,4 @@
-title My Game
+title Burn it Down
 author My Name Here
 
 realtime_interval 0.2
@@ -17,13 +17,22 @@ Background
 00001
 00000
 
-River
+Water1
 blue white
 01000
 00000
 00010
 00100
 00000
+
+
+Water2
+blue white
+00001
+01000
+01000
+10000
+00010
 
 Tree1
 green #22cc22 #008800
@@ -57,13 +66,29 @@ orange yellow red
 .202.
 00200
 
-Burned
+ash1
 black darkgray
-00000
+10000
 00110
-11000
+01000
 00100
 00010
+
+ash2
+black darkgray
+01000
+10100
+00000
+01010
+10010
+
+ash3
+black darkgray
+00100
+00001
+01000
+00101
+00000
 
 Bridge
 yellow orange
@@ -127,16 +152,21 @@ blue white
 =======
 LEGEND
 =======
+burned = ash1 or ash2 or ash3
+
 Player = Player1 or PlayerWBridge or PlayerWBridgeR
-Tree = Tree1 or BridgePlaced or BridgeRPlaced
+Tree = Tree1 or BridgePlaced or BridgeRPlaced or Bridge or BridgeR
 Bridges = BridgeR or Bridge
-Allfire = Fire1 or SmallFire or Fire or burned
+Allfire = Fire1 or SmallFire or Fire or Burned
+river = Water1 or Water2
+
+
 
 . = Background
 P = Player1
-R = River
+R = Water1
 T = Tree1
-B = Burned
+B = ash1
 F = Fire
 - = Bridge
 u = BridgeR
@@ -152,21 +182,31 @@ COLLISIONLAYERS
 ================
 
 Background
-Tree1, Fire, Burned, BridgePlaced, SmallFire, Fire1, Bridge, BridgeR, BridgeRPlaced
-Player, River
+Tree, Fire, Burned, BridgePlaced, SmallFire, Fire1, Bridge, BridgeR, BridgeRPlaced
+Player1, Water1, Water2
+PlayerWBridgeR, PlayerWBridge
 ======
 RULES
 ======
+
+
+
 
 (Light it up)
 [Action Player1|tree] -> [Player1|Fire]  
 
 
-
+(Animations)
 (Fire Animation)
-[SmallFire]->[burned] again
+[SmallFire]->[random burned] again
 [fire1] -> [smallfire] again
 [fire] -> [Fire1] again
+
+(Water)
+
+random[Water1]-> [Water2]
+random[Water1]-> [Water2]
+random[water2]-> [water1]
 
 (Fire Spreading)
 (Add lines to make it faster, remove to slow it down)
@@ -182,12 +222,12 @@ Random [allfire|tree] ->[allfire|Fire] again
 
 
 (Bridge Pickup)
-[Player Bridge] -> [PlayerWBridge]
-[Player BridgeR] -> [PlayerWBridger]
+[Player1 Bridge] -> [PlayerWBridge]
+[Player1 BridgeR] -> [PlayerWBridger]
 
 (Bridge Placement)
-[PlayerWBridge| River] -> [Player1 | BridgePlaced]
-[PlayerWBridger| River] -> [Player1 | BridgeRPlaced]
+[PlayerWBridge River] -> [Player1  BridgePlaced]
+[PlayerWBridger River] -> [Player1  BridgeRPlaced]
 
 
 ==============
@@ -201,7 +241,7 @@ LEVELS
 =======
 
 MESSAGE Burn it all!
-
+(level1)
 tttttt..ttttrrtttttt...tttttttrrtttttttttt.tttttttt
 tttttt.....ttrtttttt.t..ttttttrrtttttttt..ttttttttt
 tttt.ttt.-.ttrrtttttttt.tttttttrrtttt....tttttttttt
@@ -222,6 +262,7 @@ t..t.ttt.ttttrtttttt.tttttttttttttrrtttt..ttttttttt
 
 MESSAGE Woah, that was tough, eh?!
 
+(level2)
 tttttttttttttttttttttttt.tttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrt.tttttt
 ttttttttttttttttttt.ttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr..tttttttttt
 ttttttt..tttttt.....ttt.ttttttt..tttttttrrrrrrrrrrrrrrrrrrrrrrr.t..tttt..t..tt
@@ -235,12 +276,12 @@ ttttttttttt.tt..tttt.tttttttt.tttt..t.ttt..rrrrrr..t..t.ttt.t..tt.tt.tt.tt.trr
 ttttt......tttt....t...t.tttttttttttttt.tr.rrr..r.ttt..t.tt.ttt..ttt.tttttrrrt
 ttttt......tttttttttt..t.tttttttt..t.ttttrrrr....ttt..tt..t.tttt.t..tt.ttrrrt.
 ttttt...ttt.t.tttttt.t..ttt.ttttt..ttt..rrrrr...ttt..tt.t.tttttttt.t..ttrrr..t
-ttt...ttttttt.tttttt...tt..tt..t.tttt..rr.rr..tt..ttttt...tttttt.t..t.ttrrr.t.
+ttt...ttttttt.tttttt...tt..tt..t.tttt..rr.rr..tt..ttttt.-.tttttt.t..t.ttrrr.t.
 tt.t..ttttttttttttt......ttt...t.tt..rrr..rr..t..t.ttt..tt.tt.ttttttt.rrrr.t.t
 ttt....ttt....ttttt....tt..tt..tt.t..rrr..r...tttttt.tt.tt.tt.t..ttt.trrrr.ttt
 tt.tt..tttttt.tttttt..t.....t..tttt.rrr..rr..ttt.ttttt.ttttttt..tttttrrrrr..t.
 tt.ttt.t.tt.-t.tttttttttttttt..tttt.rr.t.rr.ttttttttt..ttt.tt..ttttttrtrrrtt.t
-tt..tttt.t...t....ttt...t.tt..tt.tt.rr.t.rrtt.ttttt.t..tttttt..t.ttt.r.rrrtt..
+tt..tttt.t...t....ttt...t.tt..tt.tt.rr.t.rrtt.ttttt.t.utttttt..t.ttt.r.rrrtt..
 .ttttttttp..tt.....tt...t.t.ttt..tt.rr.ttrrtt.tt.ttttt.t.t..tttt.tttrt.trrttt.
 tt.ttttttttt.tt....ttt.tttt..tttttt.r...trrtt.tttt.ttttttttttttttt.rrt.trrrtt.
 ttt.tttt.....ttt..ttttt..tttttt..ttrr.t.trrttttttt.tt.t.t.t.t.tt..rrt.tttrrtt.
@@ -265,7 +306,7 @@ ttttttttttttt...tt.tttt..t...rtt.ttttttttttttttt.rrrtttttt.tttttttrrr..tt..ttt
 tt.ttttttt.tt....tttttt.t...rtt.t.t.tttttttt.tttt.trttt..tttttt.trrtt..t.ttttt
 tttt.ttt.tttttt...ttt..tt...rt..t.tttt.ttttttttttttr.ttt..ttttttrr.t.tt......t
 tt.ttttt.tt..t...tttt.ttt..rrt.tt.ttt.ttt..ttt.ttttrrr.ttttttt.tr.t.t.ttt..t..
-ttttttttt....tttt..tt..tt..rrt.tt..tt.tttt..ttt.ttt...rr.tt....rrttt.ttttt.tt.
+ttttttttt....tttt..tt..tt..rrt.tt..tt.tttt-.ttt.ttt...rr.tt....rrttt.ttttt.tt.
 t.ttt.ttttttttttttttt..ttt.r.tttt..tttttttttttttttt.t...rrttt.rr..ttttt..ttttt
 ttttt..tttttttttttt.tt.ttt.rttttttttttt.ttttttttt.tttt...rrtttr....ttt.ttttttt
 tttttttttttttt.t.ttt.ttttttrttttttt.t..tt..tt..tttt.ttttt.rr..r...t.tt.t.ttttt
