@@ -155,26 +155,26 @@ red darkred
 00000
 
 PlayerWBridgeR
-blue red
-00000
-00000
-00000
+darkblue red white darkred
+.000.
+00220
+00220
 11111
-11111
+33333
 
 PlayerWBridge
-blue yellow
-00000
-00000
-00000
+darkblue yellow white orange
+.000.
+00220
+00220
 11111
-11111
+33333
 
 
 Player1
-blue white
-00000
-00000
+darkblue white
+.000.
+00110
 00110
 00000
 00000
