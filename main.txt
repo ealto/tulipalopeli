@@ -34,6 +34,38 @@ blue white
 10000
 00010
 
+RiverRounderBL
+green #22cc22 #008800
+.....
+.....
+.....
+0....
+02...
+
+RiverRounderTL
+green #22cc22 #008800
+00...
+0....
+.....
+.....
+.....
+
+RiverRounderBR
+green #22cc22 #008800
+.....
+.....
+.....
+....2
+...12
+
+RiverRounderTR
+green #22cc22 #008800
+...00
+....0
+.....
+.....
+.....
+
 Tree1
 green #22cc22 #008800
 00000
@@ -147,6 +179,14 @@ blue white
 00000
 00000
 
+Torch
+brown orange yellow
+..111
+.121.
+.00..
+.0...
+00...
+
 
 
 =======
@@ -170,6 +210,11 @@ B = ash1
 F = Fire
 - = Bridge
 u = BridgeR
+o = torch
+1 = Water1 and RiverRounderBL
+7 = Water1 and RiverRounderTL
+3 = Water1 and RiverRounderBR
+9 = Water1 and RiverRounderTR
 
 
 
@@ -183,7 +228,9 @@ COLLISIONLAYERS
 
 Background
 Tree, Fire, Burned, BridgePlaced, SmallFire, Fire1, Bridge, BridgeR, BridgeRPlaced
+Torch
 Player1, Water1, Water2
+RiverRounderBL, RiverRounderTL, RiverRounderBR, RiverRounderTR
 PlayerWBridgeR, PlayerWBridge
 ======
 RULES
@@ -240,29 +287,51 @@ no tree
 LEVELS
 =======
 
-MESSAGE Burn it all!
+MESSAGE Get to the torch and burn it all!
 (level1)
-tttttt..ttttrrtttttt...tttttttrrtttttttttt.tttttttt
-tttttt.....ttrtttttt.t..ttttttrrtttttttt..ttttttttt
-tttt.ttt.-.ttrrtttttttt.tttttttrrtttt....tttttttttt
-tttttt.t...tttrttt.tttt.ttt.tttrrtttt.....ttttttttt
+tttttt..tttt1rtttttt...ttttttt.ttttttttttt.tttttttt
+tttttt.....ttrtttttt.t..tttttt19tttttttt..ttttttttt
+tttt.ttt.-.tt19tttttttt.tttttttrttttt....tttttttttt
+tttttt.t...tttrttt.tttt.ttt.ttt1.tttt.....ttttttttt
 tttttttttt.tttrtttttttt.t.ttttttrttttt....ttttttttt
-tt.tttttttttttrtttttttttttttttttrrtttt....ttttttttt
-ttttttttttttttrtt..ttttt.tttttttrrttttt.tttttt.tttt
-ttttpttt.tt.trrtt...tttt.ttttttttrrtttttttttt..tttt
-tttttttttttttrttt....ttt.ttt.ttttrrrttttttttt.ttttt
-tttttt.tttttrrttt.u..tt..tttttttttrrttt.ttttt...t.t
-ttttttttt.ttrtttt...tt...tttttttttrrttt.ttttt.....t
-tt.ttt.tttttrtttt...tt..tttttt.ttttrtt..tttt......t
+tt.ttttttttttt.tttttttttttttttttrttttt....ttttttttt
+ttttttttttttttrtt..ttttt.tttttttrtttttt.tttttt.tttt
+ttttpttt.tt.t73tt...tttt.ttttttt19ttttttttttt..tttt
+tttttttttttttrttt....ttt.ttt.tttt.ttttttttttt.ttttt
+tttttt.ttttt73ttt.u..tt..ttttttttt9tttt.ttttt...t.t
+ttttttttt.ttrtttt...tt...ttttttttt19ttt.ttttt.....t
+tt.ttt.ttttt.tttt...tt..tttttt.ttttrtt..tttt..o...t
 ttttttttttttrttttt.ttt..tttt.tt.tttrtt..tttt......t
-ttt.t.tt.tttrrtt...ttt..ttttt...tttrtt..ttttt.tt.tt
+ttt.t.tt.ttt1.tt...ttt..ttttt...tttrtt..ttttt.tt.tt
 tt.ttttttttttrtt..ttttt.tttttttttttrttt...ttttttttt
-t..t.ttt.ttttrtttttt.tttttttttttttrrtttt..ttttttttt
-...ttttttttttrtttttttttttttttttttrrttttt...tttttttt
+t..t.ttt.ttttrtttttt.ttttttttttttt73tttt..ttttttttt
+...ttttttttttrttttttttttttttttttt7rttttt...tttttttt
 
-MESSAGE You did it you little pyromaniac! Try this next!
+MESSAGE You little pyromaniac! Try this next!
 
 (level2)
+ttttttttttttttttt1rttttttttttttttt1rrttttttttttttttt
+tttttttttttttttttt19tttttttttttttttrrttttt.ttttttttt
+tt.ttttttttttttttttrttttt...tttt.ttrrtttt.tttttttttt
+t.ttttttt.tttttttttr9ttttt..tttttttrrtttttt.tttttttt
+ttt.tttttt....ttttt1rttttt..-ttttttrrttttttttttttttt
+tttttttttt..-.ttttttrtttttt...tttttrrttttttttttttttt
+tttttpttttt....tttttrttttttttttttttrrttttttttttttttt
+ttttttttttttttttttttrttttttttttttt7r3ttttttttttttttt
+ttttttttttttttttttt7rtttttttttttttrrtttttttttt...ttt
+tttttttttttttttttt7rrtttt.t.ttttttrrttttttttt....ttt
+ttttt.ttttttttt7rrrrrtttt...ttttttrrttttttttt..t.ttt
+ttttttttttttt7rrr3tr3ttt.u..ttt.ttrrtt.ttttt.o...ttt
+ttt.t.ttttt7rr3ttttrtttt...tttttttrrtttttttt....tttt
+ttttttttt7rr3tt..ttrttttttttttttttrrt.tttttttttttttt
+ttttttt7rr3tttt-.ttrttttttttttttt7rrtttttttttttttttt
+9tttt7rrr3ttt...tt73tt.tttt.tttttrrr.ttttttttttttt.t
+rrrrrrrrrtttttttttrttttttttttttttrrr...ttttttttttttt
+
+
+MESSAGE Welcome to the Big Leagues!
+
+(level3)
 tttttttttttttttttttttttt.tttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrt.tttttt
 ttttttttttttttttttt.ttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr..tttttttttt
 ttttttt..tttttt.....ttt.ttttttt..tttttttrrrrrrrrrrrrrrrrrrrrrrr.t..tttt..t..tt
