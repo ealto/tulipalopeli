@@ -179,6 +179,14 @@ darkblue white
 00000
 00000
 
+PlayerWTorch
+darkblue white orange yellow brown
+.000.
+20110
+30110
+40000
+40000
+
 Torch
 brown orange yellow
 ..111
@@ -194,7 +202,7 @@ LEGEND
 =======
 burned = ash1 or ash2 or ash3
 
-Player = Player1 or PlayerWBridge or PlayerWBridgeR
+Player = Player1 or PlayerWBridge or PlayerWBridgeR or PlayerWTorch
 Tree = Tree1 or BridgePlaced or BridgeRPlaced or Bridge or BridgeR
 Bridges = BridgeR or Bridge
 Allfire = Fire1 or SmallFire or Fire or Burned
@@ -229,7 +237,7 @@ COLLISIONLAYERS
 Background
 Tree, Fire, Burned, BridgePlaced, SmallFire, Fire1, Bridge, BridgeR, BridgeRPlaced
 Torch
-Player1, Water1, Water2
+Player1, Water1, Water2, PlayerWTorch
 RiverRounderBL, RiverRounderTL, RiverRounderBR, RiverRounderTR
 PlayerWBridgeR, PlayerWBridge
 ======
@@ -240,7 +248,10 @@ RULES
 
 
 (Light it up)
-[Action Player1|tree] -> [Player1|Fire]  
+[Action PlayerWTorch|tree] -> [Player1|Fire]  
+
+(Torch pickup)
+[Player1 Torch] -> [PlayerWTorch]
 
 
 (Animations)
@@ -275,6 +286,8 @@ Random [allfire|tree] ->[allfire|Fire] again
 (Bridge Placement)
 [PlayerWBridge River] -> [Player1  BridgePlaced]
 [PlayerWBridger River] -> [Player1  BridgeRPlaced]
+
+
 
 
 ==============
