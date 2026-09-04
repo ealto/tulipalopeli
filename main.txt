@@ -1,0 +1,274 @@
+title My Game
+author My Name Here
+
+realtime_interval 0.2
+again_interval 0.05
+
+
+========
+OBJECTS
+========
+
+Background
+#005500 #008800
+00000
+01000
+00000
+00001
+00000
+
+River
+blue white
+01000
+00000
+00010
+00100
+00000
+
+Tree1
+green #22cc22 #008800
+00000
+01010
+00102
+01002
+02212
+
+Fire
+orange yellow red
+.111.
+10101
+.020.
+.020.
+00200
+
+Fire1
+orange yellow red
+.111.
+10101
+.020.
+.020.
+00200
+
+SmallFire
+orange yellow red
+.....
+.....
+.020.
+.202.
+00200
+
+Burned
+black darkgray
+00000
+00110
+11000
+00100
+00010
+
+Bridge
+yellow orange
+00000
+11111
+00000
+11111
+00000
+
+BridgePlaced
+yellow orange
+00000
+11111
+00000
+11111
+00000
+
+BridgeR
+red darkred
+00000
+11111
+00000
+11111
+00000
+
+BridgeRPlaced
+red darkred
+00000
+11111
+00000
+11111
+00000
+
+PlayerWBridgeR
+blue red
+00000
+00000
+00000
+11111
+11111
+
+PlayerWBridge
+blue yellow
+00000
+00000
+00000
+11111
+11111
+
+
+Player1
+blue white
+00000
+00000
+00110
+00000
+00000
+
+
+
+=======
+LEGEND
+=======
+Player = Player1 or PlayerWBridge or PlayerWBridgeR
+Tree = Tree1 or BridgePlaced or BridgeRPlaced
+Bridges = BridgeR or Bridge
+Allfire = Fire1 or SmallFire or Fire or burned
+
+. = Background
+P = Player1
+R = River
+T = Tree1
+B = Burned
+F = Fire
+- = Bridge
+u = BridgeR
+
+
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Tree1, Fire, Burned, BridgePlaced, SmallFire, Fire1, Bridge, BridgeR, BridgeRPlaced
+Player, River
+======
+RULES
+======
+
+(Light it up)
+[Action Player1|tree] -> [Player1|Fire]  
+
+
+
+(Fire Animation)
+[SmallFire]->[burned] again
+[fire1] -> [smallfire] again
+[fire] -> [Fire1] again
+
+(Fire Spreading)
+(Add lines to make it faster, remove to slow it down)
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+Random [allfire|tree] ->[allfire|Fire] again
+
+
+(Bridge Pickup)
+[Player Bridge] -> [PlayerWBridge]
+[Player BridgeR] -> [PlayerWBridger]
+
+(Bridge Placement)
+[PlayerWBridge| River] -> [Player1 | BridgePlaced]
+[PlayerWBridger| River] -> [Player1 | BridgeRPlaced]
+
+
+==============
+WINCONDITIONS
+==============
+
+no tree
+
+=======
+LEVELS
+=======
+
+MESSAGE Burn it all!
+
+tttttt..ttttrrtttttt...tttttttrrtttttttttt.tttttttt
+tttttt.....ttrtttttt.t..ttttttrrtttttttt..ttttttttt
+tttt.ttt.-.ttrrtttttttt.tttttttrrtttt....tttttttttt
+tttttt.t...tttrttt.tttt.ttt.tttrrtttt.....ttttttttt
+tttttttttt.tttrtttttttt.t.ttttttrttttt....ttttttttt
+tt.tttttttttttrtttttttttttttttttrrtttt....ttttttttt
+ttttttttttttttrtt..ttttt.tttttttrrttttt.tttttt.tttt
+ttttpttt.tt.trrtt...tttt.ttttttttrrtttttttttt..tttt
+tttttttttttttrttt....ttt.ttt.ttttrrrttttttttt.ttttt
+tttttt.tttttrrttt.u..tt..tttttttttrrttt.ttttt...t.t
+ttttttttt.ttrtttt...tt...tttttttttrrttt.ttttt.....t
+tt.ttt.tttttrtttt...tt..tttttt.ttttrtt..tttt......t
+ttttttttttttrttttt.ttt..tttt.tt.tttrtt..tttt......t
+ttt.t.tt.tttrrtt...ttt..ttttt...tttrtt..ttttt.tt.tt
+tt.ttttttttttrtt..ttttt.tttttttttttrttt...ttttttttt
+t..t.ttt.ttttrtttttt.tttttttttttttrrtttt..ttttttttt
+...ttttttttttrtttttttttttttttttttrrttttt...tttttttt
+
+MESSAGE Woah, that was tough, eh?!
+
+tttttttttttttttttttttttt.tttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrt.tttttt
+ttttttttttttttttttt.ttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr..tttttttttt
+ttttttt..tttttt.....ttt.ttttttt..tttttttrrrrrrrrrrrrrrrrrrrrrrr.t..tttt..t..tt
+tttttttttttttttt.................t.ttt.tttrrrrrrrrrrrrr..ttttttttttt.tt.tt...t
+tttt.tttt....tttttt....ttttt.....tttttttttttrrrrrrrrrt.tt.tttttt.ttttt....tt.t
+ttt.ttttttt..ttttttttt.t.ttt...ttt...ttt....trrrrrr.t...ttt.tt.t.tttt.ttttttt.
+ttttt.tttttttttttttt.tt.tttt..tttttttttttt..trrrrrr.t.ttttt.ttttttttt.tttt.t.t
+.ttttttttt..t.t.tttt.ttttttt.ttttt.t...tttt.rrrrrr.tt.tt.ttt...tt..t.ttt.ttttt
+ttttttttttt.tt..tttt.tttttttt.tttt..t.ttt..rrrrrr..t..t.ttt.t..tt.tt.tt.tt.trr
+.tttt.tt..ttttt....tt.ttttttttttttttttt.t.rrrrrrr..ttttttt..t.tt..ttttttt..rrr
+ttttt......tttt....t...t.tttttttttttttt.tr.rrr..r.ttt..t.tt.ttt..ttt.tttttrrrt
+ttttt......tttttttttt..t.tttttttt..t.ttttrrrr....ttt..tt..t.tttt.t..tt.ttrrrt.
+ttttt...ttt.t.tttttt.t..ttt.ttttt..ttt..rrrrr...ttt..tt.t.tttttttt.t..ttrrr..t
+ttt...ttttttt.tttttt...tt..tt..t.tttt..rr.rr..tt..ttttt...tttttt.t..t.ttrrr.t.
+tt.t..ttttttttttttt......ttt...t.tt..rrr..rr..t..t.ttt..tt.tt.ttttttt.rrrr.t.t
+ttt....ttt....ttttt....tt..tt..tt.t..rrr..r...tttttt.tt.tt.tt.t..ttt.trrrr.ttt
+tt.tt..tttttt.tttttt..t.....t..tttt.rrr..rr..ttt.ttttt.ttttttt..tttttrrrrr..t.
+tt.ttt.t.tt.-t.tttttttttttttt..tttt.rr.t.rr.ttttttttt..ttt.tt..ttttttrtrrrtt.t
+tt..tttt.t...t....ttt...t.tt..tt.tt.rr.t.rrtt.ttttt.t..tttttt..t.ttt.r.rrrtt..
+.ttttttttp..tt.....tt...t.t.ttt..tt.rr.ttrrtt.tt.ttttt.t.t..tttt.tttrt.trrttt.
+tt.ttttttttt.tt....ttt.tttt..tttttt.r...trrtt.tttt.ttttttttttttttt.rrt.trrrtt.
+ttt.tttt.....ttt..ttttt..tttttt..ttrr.t.trrttttttt.tt.t.t.t.t.tt..rrt.tttrrtt.
+tttttttt.....t.ttttt.tttt.ttttttt.trr.t.trr.tttttt.tttt.ttt..t.ttrr...ttrrrttt
+ttt..ttt....ttt.tttt.tt.tt.tt.t...trt.ttttr..ttt.t.ttt..t.tt.t..rr.tttt.rrrtt.
+tttttttttttttttttt..tttt.tttttt....rt.tt..rr.ttt.tt.ttt.t..tt.ttrtttttt.rrrt.t
+ttttt.tttttt.t..tt..ttttttttt.....rrtt.t.t.r.ttt.t..tttttt.ttt..r....tt.rrrttt
+tttttttttttttttttttttttttttttt....rr.ttttt..rtttt.tt.ttttt.tt.trrtt.ttttrrrt.t
+tttt.ttttttttttt.ttt.tttttttt...rrr..tttttttrtttt.t.tttt.t.t..trtttt..ttrrrt..
+ttt.tt.tt....t..tttttttttt.tt..rr..t.tttttttrtttt.ttttttt.tttt.rrt..tt.t.rrttt
+tt...ttt.........tt..ttttttt..rrr.ttttt.ttttrrttt.tt...ttt.t..ttr...tttt.rttt.
+rrrrrrrrrrrrrrr..tt..rrrrrrrrrrrtttttt.ttt.ttrttt.tt...ttt.ttt.trt.t.tt.rrttt.
+rrrrrrttt..t..rrrrrrrrrrrrrr...rtt...t.ttttttr.tt.tttt.ttt...t..ttttttttrr.ttt
+t.....tttttt.....ttt...........rtt...t.ttttttrrttt.tttt..t.tt..tttttttt.rr.t..
+t.....t.ttt.t.tttttt...........rt...ttttttttt.rtttt.tt..tttt....ttt...trrttt..
+t..tt..tttttttttttt.....ttt...rrt...tt.tttttttrtt..t.tttt.ttt....t.t.ttrrttttt
+tttt..ttt.ttttttt.u.....ttt...r.t..ttttt.ttttt.rtttt..tttt.ttttt..ttttrrttt..t
+ttt..t.tttt..tttt....tttttt...rtt.ttt..ttttttt.rrtttt.ttttttt..ttttttrrtttt..t
+ttt..tttttt.tt..tt..tt.t.tt..rrtt.tt..t.tt.ttt..r.t.t..ttttt.ttttt..trtt..t.tt
+tttttttt...tt...t.tt.ttttt...r.tttttt.tt.t.tttt..r.ttt.tttttttt.ttttrrtt...t.t
+ttttttttttttt...tt.tttt..t...rtt.ttttttttttttttt.rrrtttttt.tttttttrrr..tt..ttt
+tt.ttttttt.tt....tttttt.t...rtt.t.t.tttttttt.tttt.trttt..tttttt.trrtt..t.ttttt
+tttt.ttt.tttttt...ttt..tt...rt..t.tttt.ttttttttttttr.ttt..ttttttrr.t.tt......t
+tt.ttttt.tt..t...tttt.ttt..rrt.tt.ttt.ttt..ttt.ttttrrr.ttttttt.tr.t.t.ttt..t..
+ttttttttt....tttt..tt..tt..rrt.tt..tt.tttt..ttt.ttt...rr.tt....rrttt.ttttt.tt.
+t.ttt.ttttttttttttttt..ttt.r.tttt..tttttttttttttttt.t...rrttt.rr..ttttt..ttttt
+ttttt..tttttttttttt.tt.ttt.rttttttttttt.ttttttttt.tttt...rrtttr....ttt.ttttttt
+tttttttttttttt.t.ttt.ttttttrttttttt.t..tt..tt..tttt.ttttt.rr..r...t.tt.t.ttttt
+tttt.ttt.tt.ttt.tttttttttttrtt.t.t.tt.tttt..ttttttttt.tttt..rrr...tt.tt.ttttt.
+ttttt.t......ttt.tttttt.tttrtt..ttt...ttttttt.tttttttttttttt.rrr..tttttttt..tt
+t.t.ttt...tttttttttttttttttr.ttt.tt..t.tttttttttt......tt..tt..rr..t...tt...t.
