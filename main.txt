@@ -260,7 +260,7 @@ tt.ttttttttttrtt..ttttt.tttttttttttrttt...ttttttttt
 t..t.ttt.ttttrtttttt.tttttttttttttrrtttt..ttttttttt
 ...ttttttttttrtttttttttttttttttttrrttttt...tttttttt
 
-MESSAGE Woah, that was tough, eh?!
+MESSAGE You did it you little pyromaniac! Try this next!
 
 (level2)
 tttttttttttttttttttttttt.tttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrt.tttttt
