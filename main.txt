@@ -34,6 +34,7 @@ blue white
 10000
 00010
 
+(River rounders make the river rounder)
 RiverRounderBL
 green #22cc22 #008800
 .....
@@ -162,6 +163,18 @@ darkblue red white darkred
 11111
 33333
 
+(PlayewbridgeXonbridgeY are assigned to a player 
+holding the wrong color bridge on another bridge)
+
+Playe_W_BridgeR_On_BridgeY
+darkblue red white darkred
+.000.
+00220
+00220
+11111
+33333
+
+
 PlayerWBridge
 darkblue yellow white orange
 .000.
@@ -170,6 +183,13 @@ darkblue yellow white orange
 11111
 33333
 
+Playe_W_BridgeY_On_BridgeR
+darkblue yellow white orange
+.000.
+00220
+00220
+11111
+33333
 
 Player1
 darkblue white
@@ -202,11 +222,18 @@ LEGEND
 =======
 burned = ash1 or ash2 or ash3
 
-Player = Player1 or PlayerWBridge or PlayerWBridgeR or PlayerWTorch
+Player = Player1 or PlayerWBridge or PlayerWBridgeR or PlayerWTorch or playe_w_bridgey_on_bridger or Playe_W_BridgeR_On_BridgeY
+
 Tree = Tree1 or BridgePlaced or BridgeRPlaced or Bridge or BridgeR
+
 Bridges = BridgeR or Bridge
+
 Allfire = Fire1 or SmallFire or Fire or Burned
+
 river = Water1 or Water2
+
+placedbridges = BridgePlaced or BridgeRPlaced 
+
 
 
 
@@ -237,7 +264,7 @@ COLLISIONLAYERS
 Background
 Tree, Fire, Burned, BridgePlaced, SmallFire, Fire1, Bridge, BridgeR, BridgeRPlaced
 Torch
-Player1, Water1, Water2, PlayerWTorch
+Player1, Water1, Water2, PlayerWTorch, playe_w_bridgey_on_bridger, playe_w_bridger_on_bridgey
 RiverRounderBL, RiverRounderTL, RiverRounderBR, RiverRounderTR
 PlayerWBridgeR, PlayerWBridge
 ======
@@ -283,6 +310,22 @@ Random [allfire|tree] ->[allfire|Fire] again
 [Player1 Bridge] -> [PlayerWBridge]
 [Player1 BridgeR] -> [PlayerWBridger]
 
+(Bridge colorcoded placement blocking:)
+
+(Tell if player is on wrong bridge)
+[PlayerWBridge BridgeRPlaced] -> [playe_w_bridgey_on_bridger BridgeRPlaced]
+[PlayerWBridgeR BridgePlaced] -> [Playe_W_BridgeR_On_BridgeY BridgePlaced]
+
+(See if has left the wrong bridge)
+[playe_w_bridgey_on_bridger no placedbridges] -> [PlayerWBridge] 
+[playe_w_bridger_on_bridgey no placedbridges] -> [PlayerWBridger] 
+
+(dont let the player place wrong color bridge)
+[> playe_w_bridgey_on_bridger |river] -> [< PlayerWBridge| river]
+[> playe_w_bridger_on_bridgey |river] -> [< PlayerWBridger| river]
+
+
+
 (Bridge Placement)
 [PlayerWBridge River] -> [Player1  BridgePlaced]
 [PlayerWBridger River] -> [Player1  BridgeRPlaced]
@@ -300,27 +343,27 @@ no tree
 LEVELS
 =======
 
-MESSAGE Get to the torch and burn it all!
+MESSAGE Get to the torch and burn it all! (With the action button)
 (level1)
-tttttt..tttt1rtttttt...ttttttt.ttttttttttt.tttttttt
-tttttt.....ttrtttttt.t..tttttt19tttttttt..ttttttttt
-tttt.ttt.-.tt19tttttttt.tttttttrttttt....tttttttttt
-tttttt.t...tttrttt.tttt.ttt.ttt1.tttt.....ttttttttt
-tttttttttt.tttrtttttttt.t.ttttttrttttt....ttttttttt
-tt.ttttttttttt.tttttttttttttttttrttttt....ttttttttt
-ttttttttttttttrtt..ttttt.tttttttrtttttt.tttttt.tttt
-ttttpttt.tt.t73tt...tttt.ttttttt19ttttttttttt..tttt
-tttttttttttttrttt....ttt.ttt.tttt.ttttttttttt.ttttt
-tttttt.ttttt73ttt.u..tt..ttttttttt9tttt.ttttt...t.t
-ttttttttt.ttrtttt...tt...ttttttttt19ttt.ttttt.....t
-tt.ttt.ttttt.tttt...tt..tttttt.ttttrtt..tttt..o...t
-ttttttttttttrttttt.ttt..tttt.tt.tttrtt..tttt......t
-ttt.t.tt.ttt1.tt...ttt..ttttt...tttrtt..ttttt.tt.tt
-tt.ttttttttttrtt..ttttt.tttttttttttrttt...ttttttttt
-t..t.ttt.ttttrtttttt.ttttttttttttt73tttt..ttttttttt
-...ttttttttttrttttttttttttttttttt7rttttt...tttttttt
+tttttt..tttt1rttttttt..tttttttrttttttttttt.tttttttt
+t.tttt.....ttrtttttttt.ttttttt19tttttttt..ttttttttt
+.ttttttt.-.tt19ttttttttttttttttrttttt.t..ttttt.tttt
+tt.ttttt...tttrtttttttttttt.ttt19tttt...ttttt.ttttt
+tttttttttt.tttrtttttttttt.ttttttrttttt..ttttttt.ttt
+ttttttttttttttrtttttttttttttttttrttttt..ttttttttttt
+tttttpttttttttrttt.tttttttttttttrtttttt.ttttttttttt
+tttt.tttttttt73ttt..tttttttttttt19ttttttttttttttttt
+ttttttt.tttttrttt....tttt.tt.tttt1ttttttttttttttttt
+ttttttttt.tt73ttt.u..ttt.ttttttttt9ttttttttttt.tt.t
+ttttt.ttttttrtttt...tttttttttttttt19ttttttttt...ttt
+tttttt.tttttrttttt..tttttttttt.ttttrttttttttt.o..tt
+ttttt...ttttrttttttttttttttt.tt.tttrtttt.ttttt..ttt
+ttttt...tttt1tttttttttttttttt...tttrttt.ttttttttttt
+tt.tttt..tttt9tttttttttttttttttttttrttttt.ttttttttt
+t..t..tt.ttttr.ttttttttttttttttttt73ttttttttttttttt
+...ttt.ttttttr..ttttttttttttttttt7rtttttttttttttttt
 
-MESSAGE You little pyromaniac! Try this next!
+MESSAGE You little pyromaniac! Try this next! 
 
 (level2)
 ttttttttttttttttt1rttttttttttttttt1rrttttttttttttttt
@@ -329,7 +372,7 @@ tt.ttttttttttttttttrttttt...tttt.ttrrtttt.tttttttttt
 t.ttttttt.tttttttttr9ttttt..tttttttrrtttttt.tttttttt
 ttt.tttttt....ttttt1rttttt..-ttttttrrttttttttttttttt
 tttttttttt..-.ttttttrtttttt...tttttrrttttttttttttttt
-tttttpttttt....tttttrttttttttttttttrrttttttttttttttt
+tttttpttttt.u..tttttrttttttttttttttrrttttttttttttttt
 ttttttttttttttttttttrttttttttttttt7r3ttttttttttttttt
 ttttttttttttttttttt7rtttttttttttttrrtttttttttt...ttt
 tttttttttttttttttt7rrtttt.t.ttttttrrttttttttt....ttt
