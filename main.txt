@@ -34,7 +34,6 @@ blue white
 10000
 00010
 
-(River rounders make the river rounder)
 RiverRounderBL
 green #22cc22 #008800
 .....
@@ -61,6 +60,38 @@ green #22cc22 #008800
 
 RiverRounderTR
 green #22cc22 #008800
+...00
+....0
+.....
+.....
+.....
+
+RiverRounderInvBL
+blue white
+.....
+.....
+.....
+0....
+00...
+
+RiverRounderInvTL
+blue white
+00...
+0....
+.....
+.....
+.....
+
+RiverRounderInvBR
+blue white
+.....
+.....
+.....
+....0
+...00
+
+RiverRounderInvTR
+blue white
 ...00
 ....0
 .....
@@ -163,17 +194,6 @@ darkblue red white darkred
 11111
 33333
 
-(PlayewbridgeXonbridgeY are assigned to a player 
-holding the wrong color bridge on another bridge)
-
-Playe_W_BridgeR_On_BridgeY
-darkblue red white darkred
-.000.
-00220
-00220
-11111
-33333
-
 
 PlayerWBridge
 darkblue yellow white orange
@@ -183,13 +203,6 @@ darkblue yellow white orange
 11111
 33333
 
-Playe_W_BridgeY_On_BridgeR
-darkblue yellow white orange
-.000.
-00220
-00220
-11111
-33333
 
 Player1
 darkblue white
@@ -222,16 +235,11 @@ LEGEND
 =======
 burned = ash1 or ash2 or ash3
 
-Player = Player1 or PlayerWBridge or PlayerWBridgeR or PlayerWTorch or playe_w_bridgey_on_bridger or Playe_W_BridgeR_On_BridgeY
-
+Player = Player1 or PlayerWBridge or PlayerWBridgeR or PlayerWTorch
 Tree = Tree1 or BridgePlaced or BridgeRPlaced or Bridge or BridgeR
-
 Bridges = BridgeR or Bridge
-
 Allfire = Fire1 or SmallFire or Fire or Burned
-
 river = Water1 or Water2
-
 placedbridges = BridgePlaced or BridgeRPlaced 
 
 
@@ -250,6 +258,10 @@ o = torch
 7 = Water1 and RiverRounderTL
 3 = Water1 and RiverRounderBR
 9 = Water1 and RiverRounderTR
+å = tree1 and RiverRounderInvBL
+n = tree1 and RiverRounderInvBR
+m = tree1 and RiverRounderInvTR
+l = tree1 and RiverRounderInvTL
 
 
 
@@ -264,8 +276,8 @@ COLLISIONLAYERS
 Background
 Tree, Fire, Burned, BridgePlaced, SmallFire, Fire1, Bridge, BridgeR, BridgeRPlaced
 Torch
-Player1, Water1, Water2, PlayerWTorch, playe_w_bridgey_on_bridger, playe_w_bridger_on_bridgey
-RiverRounderBL, RiverRounderTL, RiverRounderBR, RiverRounderTR
+Player1, Water1, Water2, PlayerWTorch
+RiverRounderBL, RiverRounderTL, RiverRounderBR, RiverRounderTR, RiverRounderInvBL, RiverRounderInvTL, RiverRounderInvBR, RiverRounderInvTR
 PlayerWBridgeR, PlayerWBridge
 ======
 RULES
@@ -310,20 +322,9 @@ Random [allfire|tree] ->[allfire|Fire] again
 [Player1 Bridge] -> [PlayerWBridge]
 [Player1 BridgeR] -> [PlayerWBridger]
 
-(Bridge colorcoded placement blocking:)
-
-(Tell if player is on wrong bridge)
-[PlayerWBridge BridgeRPlaced] -> [playe_w_bridgey_on_bridger BridgeRPlaced]
-[PlayerWBridgeR BridgePlaced] -> [Playe_W_BridgeR_On_BridgeY BridgePlaced]
-
-(See if has left the wrong bridge)
-[playe_w_bridgey_on_bridger no placedbridges] -> [PlayerWBridge] 
-[playe_w_bridger_on_bridgey no placedbridges] -> [PlayerWBridger] 
-
-(dont let the player place wrong color bridge)
-[> playe_w_bridgey_on_bridger |river] -> [< PlayerWBridge| river]
-[> playe_w_bridger_on_bridgey |river] -> [< PlayerWBridger| river]
-
+(If on wrong color bridge)
+[> PlayerWBridgeR BridgePlaced | river] -> [< PlayerWBridgeR BridgePlaced | river]
+[> PlayerWBridge BridgeRPlaced | river] -> [< PlayerWBridge BridgeRPlaced | river]
 
 
 (Bridge Placement)
@@ -345,44 +346,44 @@ LEVELS
 
 MESSAGE Get to the torch and burn it all! (With the action button)
 (level1)
-tttttt..tttt1rttttttt..tttttttrttttttttttt.tttttttt
-t.tttt.....ttrtttttttt.ttttttt19tttttttt..ttttttttt
-.ttttttt.-.tt19ttttttttttttttttrttttt.t..ttttt.tttt
-tt.ttttt...tttrtttttttttttt.ttt19tttt...ttttt.ttttt
-tttttttttt.tttrtttttttttt.ttttttrttttt..ttttttt.ttt
+tttttt..tttt1rttttttt..tttttttråtttttttttt.tttttttt
+t.tttt.....tmråttttttt.ttttttt19tttttttt..ttttttttt
+.ttttttt.-.tt19tttttttttttttttmråtttt.t..ttttt.tttt
+tt.ttttt...ttmrtttttttttttt.ttt19tttt...ttttt.ttttt
+tttttttttt.tttrtttttttttt.tttttmrttttt..ttttttt.ttt
 ttttttttttttttrtttttttttttttttttrttttt..ttttttttttt
-tttttpttttttttrttt.tttttttttttttrtttttt.ttttttttttt
+tttttptttttttnrttt.tttttttttttttråttttt.ttttttttttt
 tttt.tttttttt73ttt..tttttttttttt19ttttttttttttttttt
-ttttttt.tttttrttt....tttt.tt.tttt1ttttttttttttttttt
-ttttttttt.tt73ttt.u..ttt.ttttttttt9ttttttttttt.tt.t
-ttttt.ttttttrtttt...tttttttttttttt19ttttttttt...ttt
-tttttt.tttttrttttt..tttttttttt.ttttrttttttttt.o..tt
+ttttttt.tttttrltt....tttt.tt.tttt1åtttttttttttttttt
+ttttttttt.tt73ttt.u..ttt.ttttttttm9ttttttttttt.tt.t
+ttttt.ttttttrlttt...tttttttttttttt19ttttttttt...ttt
+tttttt.tttttrttttt..tttttttttt.tttmrttttttttt.o..tt
 ttttt...ttttrttttttttttttttt.tt.tttrtttt.ttttt..ttt
-ttttt...tttt1tttttttttttttttt...tttrttt.ttttttttttt
-tt.tttt..tttt9tttttttttttttttttttttrttttt.ttttttttt
+ttttt...tttt1åttttttttttttttt...tttrttt.ttttttttttt
+tt.tttt..tttm9tttttttttttttttttttttrttttt.ttttttttt
 t..t..tt.ttttr.ttttttttttttttttttt73ttttttttttttttt
-...ttt.ttttttr..ttttttttttttttttt7rtttttttttttttttt
+...ttt.ttttttr..ttttttttttttttttt7rlttttttttttttttt
 
 MESSAGE You little pyromaniac! Try this next! 
 
 (level2)
-ttttttttttttttttt1rttttttttttttttt1rrttttttttttttttt
-tttttttttttttttttt19tttttttttttttttrrttttt.ttttttttt
-tt.ttttttttttttttttrttttt...tttt.ttrrtttt.tttttttttt
+ttttttttttttttttt1råtttttttttttttt1rrttttttttttttttt
+tttttttttttttttttt19ttttttttttttttmrrttttt.ttttttttt
+tt.tttttttttttttttmråtttt...tttt.ttrrtttt.tttttttttt
 t.ttttttt.tttttttttr9ttttt..tttttttrrtttttt.tttttttt
 ttt.tttttt....ttttt1rttttt..-ttttttrrttttttttttttttt
-tttttttttt..-.ttttttrtttttt...tttttrrttttttttttttttt
-tttttpttttt.u..tttttrttttttttttttttrrttttttttttttttt
+tttttttttt..-.tttttmrtttttt...tttttrrttttttttttttttt
+tttttpttttt....tttttrtttttttttttttnrrttttttttttttttt
 ttttttttttttttttttttrttttttttttttt7r3ttttttttttttttt
-ttttttttttttttttttt7rtttttttttttttrrtttttttttt...ttt
-tttttttttttttttttt7rrtttt.t.ttttttrrttttttttt....ttt
-ttttt.ttttttttt7rrrrrtttt...ttttttrrttttttttt..t.ttt
-ttttttttttttt7rrr3tr3ttt.u..ttt.ttrrtt.ttttt.o...ttt
-ttt.t.ttttt7rr3ttttrtttt...tttttttrrtttttttt....tttt
-ttttttttt7rr3tt..ttrttttttttttttttrrt.tttttttttttttt
-ttttttt7rr3tttt-.ttrttttttttttttt7rrtttttttttttttttt
-9tttt7rrr3ttt...tt73tt.tttt.tttttrrr.ttttttttttttt.t
-rrrrrrrrrtttttttttrttttttttttttttrrr...ttttttttttttt
+ttttttttttttttttttt7rtttttttttttttrrlttttttttt...ttt
+tttttttttttttttttn7rrtttt.t.ttttttrrttttttttt....ttt
+ttttt.ttttttttn7rrrrrtttt...ttttttrrttttttttt..ttttt
+ttttttttttttn7rrr3lr3ttt.u..ttt.ttrrtt.ttttt.o...ttt
+ttt.t.ttttn7rr3ltttrlttt...tttttttrrtttttttt....tttt
+ttttttttn7rr3lt..ttrtttttttttttttnrrt.tttttttttttttt
+ttttttn7rr3lttt-.tnrttttttttttttt7rrtttttttttttttttt
+r9åtn7rrr3ltt...tt73tt.tttt.tttttrrr.ttttttttttttt.t
+rrrrrrrrrlttttttttrltttttttttttttrrr...ttttttttttttt
 
 
 MESSAGE Welcome to the Big Leagues!
